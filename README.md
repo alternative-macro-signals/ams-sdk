@@ -2,12 +2,6 @@
 ![Python Version](https://img.shields.io/badge/Python-3.7%2B-blue)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
-[//]: # (<p align="right">)
-
-[//]: # (  <img src="./logo_icon_small_tw.jpg" alt="Alternative Macro Signals Logo" width="100">)
-
-[//]: # (</p>)
-
 
 Python SDK for the Alternative Macro Signals (AMS) API, providing a convenient interface for authenticating and querying endpoints.
 
@@ -27,10 +21,16 @@ Please refer to the [AMS API documentation](https://github.com/alternative-macro
 
 ## Installation 🛠️
 
+Recommended: 
 ```shell
 pip install ams-sdk
 ```
 
+Alternatively, from repo:
+
+```shell
+pip install git+https://github.com/alternative-macro-signals/ams-sdk.git
+```
 ---
 
 ## Requirements 📋
