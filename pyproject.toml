@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ams-sdk"
-version = "1.0.4"
+version = "1.0.5"
 description = "Python SDK for the Alternative Macro Signals API"
 authors = ["Laurent Bilke <laurent@alternativemacrosignals.com>"]
 readme = "README.md"
