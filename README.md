@@ -66,7 +66,7 @@ client.authenticate()
 ### Querying Endpoints
 
 Use the `query_endpoint` method to query specific AMS API endpoints:
-
+#### `/nbstat` endpoint
 ```python
 result = client.query_endpoint("/nbstat", params={
  "location": "Japan",
@@ -76,11 +76,7 @@ result = client.query_endpoint("/nbstat", params={
 print(result)
 ```
 
-
-
-### Output
-
-Transfer the `nbstat` output in a Pandas dataframe:
+Convert the `nbstat` output in a Pandas dataframe:
 
 ```python
 import pandas as pd
@@ -89,6 +85,9 @@ df['date'] = pd.to_datetime(df['date'])
 df = df.set_index('date')
 df.sort_index(inplace=True)
 ```
+
+`/nipi` endpoint coming soon!
+
 ---
 ## API endpoints callable from `AMSClient` 🌐
 
