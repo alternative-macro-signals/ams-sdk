@@ -1,11 +1,12 @@
-# AMS-SDK <img src="logo_icon_small_tw.jpg" alt="Alternative Macro Signals Logo" width="90"  align="right">
+# AMS-SDK
 ![Python Version](https://img.shields.io/badge/Python-3.7%2B-blue)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
+`ams-sdk` is a wrapper around `ams-api` and handles the authentification and query process in just a few steps.
 
-Python SDK for the Alternative Macro Signals (AMS) API, providing a convenient interface for authenticating and querying endpoints.
 
-Please refer to the [AMS API documentation](https://github.com/alternative-macro-signals/api-docs)
+
+Please refer to [AMS API documentation](https://github.com/alternative-macro-signals/api-docs)
  for a detailed description of the API endpoints, including parameters specification.
 
 ---
@@ -21,16 +22,18 @@ Please refer to the [AMS API documentation](https://github.com/alternative-macro
 
 ## Installation 🛠️
 
-Recommended: 
+From PyPI (recommended):
+
 ```shell
 pip install ams-sdk
 ```
 
-Alternatively, from repo:
+Alternatively, directly from repo:
 
 ```shell
 pip install git+https://github.com/alternative-macro-signals/ams-sdk.git
 ```
+
 ---
 
 ## Requirements 📋
@@ -66,7 +69,7 @@ client.authenticate()
 ### Querying Endpoints
 
 Use the `query_endpoint` method to query specific AMS API endpoints:
-#### `/nbstat` endpoint
+
 ```python
 result = client.query_endpoint("/nbstat", params={
  "location": "Japan",
@@ -76,7 +79,20 @@ result = client.query_endpoint("/nbstat", params={
 print(result)
 ```
 
-Convert the `nbstat` output in a Pandas dataframe:
+```python
+result = client.query_endpoint("/nipi", params={
+ "location": "Euro area",
+ "sector": "Food",
+})
+print(result)
+```
+
+
+
+
+### Output
+
+Transform the `/nbstat` or  `/nipi` output in a Pandas dataframe:
 
 ```python
 import pandas as pd
@@ -86,27 +102,36 @@ df = df.set_index('date')
 df.sort_index(inplace=True)
 ```
 
-`/nipi` endpoint coming soon!
+In order to get 7-day and 30-day rolling balances from `/nbstat` (similar to the NewsBot app):
+```python
+df7 = df.rolling(7).mean()
+df30 = df.rolling(30).mean()
+```
+
+Note: NIPI is already a 30-day rolling diffusion index.
+
 
 ---
 ## API endpoints callable from `AMSClient` 🌐
 
 
-### [`/nbstat`](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nbstat.md)
-[![API Status](https://img.shields.io/badge/API-Live-brightgreen)](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nbstat.md)
+### [`/nbstat`](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nbstat.md) [![API Status](https://img.shields.io/badge/API-Live-brightgreen)](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nbstat.md)
 
 Retrieve Inflation News Balance and News Volumes associated with specific text queries.
 
-### /nipi
-[![API Status](https://img.shields.io/badge/API-Forthcoming-orange)](#)
+### [`/nipi`](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nipi.md) [![API Status](https://img.shields.io/badge/API-Live-brightgreen)](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nbstat.md)
 
-Download NIPI data (meanwhile possible from the NIPI app or our CSV files endpoints)
+[//]: # ([![API Status]&#40;https://img.shields.io/badge/API-Forthcoming-orange&#41;]&#40;#&#41;)
 
+Download NIPI data. 
 
-### /inb
-[![API Status](https://img.shields.io/badge/API-Forthcoming-orange)](#)
+[//]: # ()
+[//]: # (### /inb)
 
-Inflation NewsBot daily lists (meanwhile possible through dedicated JSON endpoints).
+[//]: # ([![API Status]&#40;https://img.shields.io/badge/API-Forthcoming-orange&#41;]&#40;#&#41;)
+
+[//]: # ()
+[//]: # (Inflation NewsBot daily lists &#40;meanwhile possible through dedicated JSON endpoints&#41;.)
 
 ----
 
@@ -147,4 +172,4 @@ This project is licensed under the MIT License. See the [LICENSE](https://github
 
 
 
-© 2025 Alternative Macro Signals. All rights reserved. https://alt.ms <img src="./logo_icon_small_tw.jpg" alt="Alternative Macro Signals Logo" width="30"  align="right">
+© 2025 Alternative Macro Signals. All rights reserved. https://alt.ms <img src="logo_icon_small_tw.jpg" alt="Alternative Macro Signals Logo" width="30"  align="right">
