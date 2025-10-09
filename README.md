@@ -74,14 +74,15 @@ Use the `query_endpoint` method to query specific AMS API endpoints:
 result = client.query_endpoint("/nbstat", params={
  "location": "Japan",
  "txt": "rice",
- "start": "2021-01-01"
+ "start": "2023-01-01",
+ "end": "2025-06-01"
 })
 print(result)
 ```
 
 ```python
 result = client.query_endpoint("/nipi", params={
- "location": "Euro area",
+ "location": "China",
  "sector": "Food",
 })
 print(result)
