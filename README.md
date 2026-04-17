@@ -88,7 +88,24 @@ result = client.query_endpoint("/nipi", params={
 print(result)
 ```
 
-Note: see [`/nbstat`](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nbstat.md) 
+```python
+# Query Entropy data (returns all 3 signs: p_neg, p_pos, p_neu)
+result = client.query_endpoint("/nipi", params={
+ "metric": "Entropy",
+ "location": "US",
+ "sector": "All",
+ "start": "2024-01-01"
+})
+
+# Query single entropy sign
+result = client.query_endpoint("/nipi", params={
+ "metric": "Entropy",
+ "location": "US",
+ "sign": "p_pos"  # p_neg, p_pos, or p_neu
+})
+```
+
+Note: see [`/nbstat`](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nbstat.md)
 and [`/nipi`](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nipi.md) endpoints documentations for accepted parameters details. 
 
 
@@ -112,6 +129,8 @@ df30 = df.rolling(30).mean()
 
 Note: NIPI is already a 30-day rolling diffusion index.
 
+**Entropy output:** When querying with `metric=Entropy`, the response contains 3 rows per date (one for each sign: `p_neg`, `p_pos`, `p_neu`) unless filtered with the `sign` parameter. The `meta.metric_2` field identifies which sign each row represents.
+
 
 ---
 ## API endpoints callable from `AMSClient` 🌐
@@ -121,11 +140,14 @@ Note: NIPI is already a 30-day rolling diffusion index.
 
 Retrieve Inflation News Balance and News Volumes associated with specific text queries.
 
-### [`/nipi`](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nipi.md) [![API Status](https://img.shields.io/badge/API-Live-brightgreen)](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nbstat.md)
+### [`/nipi`](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nipi.md) [![API Status](https://img.shields.io/badge/API-Live-brightgreen)](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/nipi.md)
 
 [//]: # ([![API Status]&#40;https://img.shields.io/badge/API-Forthcoming-orange&#41;]&#40;#&#41;)
 
-Download NIPI data. 
+Download NIPI, NVI, or Entropy data. Use the `metric` parameter to select:
+- `NIPI` (default): News Inflation Pressure Index (30-day rolling diffusion index)
+- `NVI`: News Volume Index
+- `Entropy`: Raw entropy values (building blocks of NIPI). Use `sign` parameter to filter: `p_neg`, `p_pos`, `p_neu` 
 
 [//]: # ()
 [//]: # (### /inb)
