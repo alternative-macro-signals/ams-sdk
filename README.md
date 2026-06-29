@@ -149,13 +149,35 @@ Download NIPI, NVI, or Entropy data. Use the `metric` parameter to select:
 - `NVI`: News Volume Index
 - `Entropy`: Raw entropy values (building blocks of NIPI). Use `sign` parameter to filter: `p_neg`, `p_pos`, `p_neu` 
 
-[//]: # ()
-[//]: # (### /inb)
+### `/newsbot` ![API Status](https://img.shields.io/badge/API-Beta-orange)
 
-[//]: # ([![API Status]&#40;https://img.shields.io/badge/API-Forthcoming-orange&#41;]&#40;#&#41;)
+> **Beta** — shape may change; not yet in the formal API reference.
 
-[//]: # ()
-[//]: # (Inflation NewsBot daily lists &#40;meanwhile possible through dedicated JSON endpoints&#41;.)
+The daily Inflation/Wages **NewsBot** feed (the curated daily news list) as JSON,
+latest or by date. Requires a key entitled for this feed (`api_newsbot` for
+`inflation`, `api_newsbot_wages` for `wages`).
+
+Parameters:
+
+| Param | Values | Notes |
+|-------|--------|-------|
+| `topic` | `inflation` (default), `wages` | |
+| `tz` | `et` (London AM), `ny` (NY PM) | `wages`: `et` only |
+| `date` | `YYYY-MM-DD` | omit for the latest edition |
+| `index` | `1` | list available publications (metadata only) |
+
+```python
+# latest London-AM inflation newsbot
+result = client.query_endpoint("/newsbot", params={"topic": "inflation", "tz": "et"})
+
+# what's available
+client.query_endpoint("/newsbot", params={"topic": "inflation", "index": 1})
+```
+
+The response `content.payload` is the daily news list (a `releaseTime` plus
+numbered items). Each item carries `region, loc, stars, title, srce,
+publishedAt, url, sum, lang, sector` and a **`themes`** list of category labels
+(beta — exposed via the API only).
 
 ----
 
