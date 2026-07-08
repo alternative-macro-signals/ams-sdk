@@ -80,6 +80,18 @@ result = client.query_endpoint("/nbstat", params={
 print(result)
 ```
 
+For `/nbstat`, `location`, `sector` and `sign` also accept lists — the result
+is one combined aggregate series over all the values (`Neutral` is accepted as
+an alias for `Undefined`):
+
+```python
+result = client.query_endpoint("/nbstat", params={
+ "location": ["US", "UK"],
+ "sector": ["Core", "Energy"],
+})
+print(result)
+```
+
 ```python
 result = client.query_endpoint("/nipi", params={
  "location": "China",
@@ -200,7 +212,7 @@ publishedAt, url, sum, lang, sector` and a **`themes`** list of category labels
 ## License 📜
 
 
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/alternative-macro-signals/ams-sdk/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/alternative-macro-signals/ams-sdk/blob/master/LICENSE) file for details.
 
 
 ---
