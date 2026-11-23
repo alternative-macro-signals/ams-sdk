@@ -161,9 +161,9 @@ Download NIPI, NVI, or Entropy data. Use the `metric` parameter to select:
 - `NVI`: News Volume Index
 - `Entropy`: Raw entropy values (building blocks of NIPI). Use `sign` parameter to filter: `p_neg`, `p_pos`, `p_neu` 
 
-### `/newsbot` ![API Status](https://img.shields.io/badge/API-Beta-orange)
+### `/newsbot` ![API Status](https://img.shields.io/badge/API-Live-brightgreen)
 
-> **Beta** — shape may change; not yet in the formal API reference.
+See the [formal endpoint reference](https://github.com/alternative-macro-signals/api-docs/blob/master/docs/api-reference/endpoints/newsbot.md).
 
 The daily Inflation/Wages **NewsBot** feed (the curated daily news list) as JSON,
 latest or by date. Requires a key entitled for this feed (`api_newsbot` for
@@ -189,7 +189,7 @@ client.query_endpoint("/newsbot", params={"topic": "inflation", "index": 1})
 The response `content.payload` is the daily news list (a `releaseTime` plus
 numbered items). Each item carries `region, loc, stars, title, srce,
 publishedAt, url, sum, lang, sector` and a **`themes`** list of category labels
-(beta — exposed via the API only).
+(exposed via the API only).
 
 ----
 
